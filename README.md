@@ -88,7 +88,9 @@ In Default namespace it added the springboot deployment.
 
 ![image](https://user-images.githubusercontent.com/74225291/219263460-44327263-feb0-4e62-aeb1-4cd66ce86724.png)
 
-To generate load use the curl command
+To generate load use the curl command MULTIPLE TIMES
+
+for i in {1..1000}; do curl http://a99c2e9cbfd954451b7001eec300f231-1810103440.us-east-1.elb.amazonaws.com:8080/hello; done &
 
 ![image](https://user-images.githubusercontent.com/74225291/219264051-3689a823-2bd5-4d0f-b55a-ff46f02d07b7.png)
 
