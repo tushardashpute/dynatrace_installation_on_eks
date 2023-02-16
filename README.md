@@ -56,3 +56,46 @@ For this two nodes host monitoring is automatically enabled now.
 now you can in kubernetes cluster is added to DT UI. You can monitor everything on it.
 
 ![image](https://user-images.githubusercontent.com/74225291/219262009-185a910a-806e-4e2c-b18c-98c5d28f13ad.png)
+
+Now we can deploy one sample springboot app on EKS cluster and verify its monitoring on DT.
+
+Clone the github repo:
+
+    git clone https://github.com/cloudtechmasters/hellospringboot-cicdWithHelm.git
+    
+Deploy the springboot helm chart:
+
+    helm upgrade --install springboot chart-eks-springboot --set image.tag=latest
+
+    # k get all
+    NAME                              READY   STATUS    RESTARTS   AGE
+    pod/springboot-66f8f66878-z7vjp   1/1     Running   0          2m58s
+
+    NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP                                                               PORT(S)          AGE
+    service/kubernetes   ClusterIP      10.100.0.1     <none>                                                                    443/TCP          49m
+    service/springboot   LoadBalancer   10.100.202.9   a99c2e9cbfd954451b7001eec300f231-1810103440.us-east-1.elb.amazonaws.com   8080:30392/TCP   4m52s
+
+    NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/springboot   1/1     1            1           4m52s
+
+    NAME                                    DESIRED   CURRENT   READY   AGE
+    replicaset.apps/springboot-66f8f66878   1         1         1       2m58s
+
+
+![image](https://user-images.githubusercontent.com/74225291/219263152-8c282f82-ce43-49b5-9888-652ae5f2ae08.png)
+
+In Default namespace it added the springboot deployment.
+
+![image](https://user-images.githubusercontent.com/74225291/219263460-44327263-feb0-4e62-aeb1-4cd66ce86724.png)
+
+To generate load use the curl command
+
+![image](https://user-images.githubusercontent.com/74225291/219264051-3689a823-2bd5-4d0f-b55a-ff46f02d07b7.png)
+
+You can get more detailed info about service by clinking on services --> HelmController
+
+![image](https://user-images.githubusercontent.com/74225291/219264301-93c0c847-57e9-4972-9918-6a5c74b95cda.png)
+
+
+![image](https://user-images.githubusercontent.com/74225291/219264456-ab8866bf-c37f-47be-a6f7-74af55fb4f2a.png)
+
